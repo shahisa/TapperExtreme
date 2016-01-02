@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     //Properties
     var maxTaps = 0
     var currentTaps = 0
@@ -32,38 +32,45 @@ class ViewController: UIViewController {
     
     
     @IBAction func onPlayBtnPressed (sender:UIButton!) {
-        hiddenAreas()
+       
         
         if tapsTxt.text != nil && tapsTxt.text != "" {
             
+            tapsTxt.hidden = true
+            tapperImg.hidden = true
+            playButton.hidden = true
+            
+            coinButton.hidden = false
+            tapsLabel.hidden = false
+
             
             maxTaps = Int(tapsTxt.text!)!
             currentTaps = 0
             
+            updateTapsLabel()
             
         }
         
        
         
     }
-    func hiddenAreas (){
-        
+    
+    
+    func restartGame(){
+        maxTaps = 0
+        tapsTxt.text = ""
+   
         tapsTxt.hidden = true
         tapperImg.hidden = true
         playButton.hidden = true
         
         coinButton.hidden = false
         tapsLabel.hidden = false
-    }
-    
-    func restartGame(){
-        maxTaps = 0
-        tapsTxt.text = ""
-        hiddenAreas()
+
         
     }
     
-    func isGameOver() -> Bool{
+    func isGameOver() -> Bool {
         if currentTaps >= maxTaps {
             return true
         } else {
@@ -75,5 +82,16 @@ class ViewController: UIViewController {
     func updateTapsLabel (){
         tapsLabel.text = "\(currentTaps) Taps"
     }
+    
+    @IBAction func onTap(sender: AnyObject) {
+        self.view.endEditing(true)
+        textFieldShouldReturn(tapsTxt)
+    }
+   
+    func textFieldShouldReturn(tapsTxt: UITextField) -> Bool {
+        tapsTxt.resignFirstResponder()
+        return true
+    }
+
 }
 
