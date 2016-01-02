@@ -60,12 +60,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         maxTaps = 0
         tapsTxt.text = ""
    
-        tapsTxt.hidden = true
-        tapperImg.hidden = true
-        playButton.hidden = true
+        tapsTxt.hidden = false
+        tapperImg.hidden = false
+        playButton.hidden = false
         
-        coinButton.hidden = false
-        tapsLabel.hidden = false
+        coinButton.hidden = true
+        tapsLabel.hidden = true
 
         
     }
